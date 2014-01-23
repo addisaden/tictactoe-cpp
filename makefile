@@ -11,5 +11,11 @@ main.o:
 game.o:
 	$(COMPILER) -c game.cpp
 
+test: game_test
+
+game_test: game.o
+	$(COMPILER) game.o game_test.cpp -o game_test.out
+	./game_test.out
+
 clear:
 	rm -rf *.o *.out
