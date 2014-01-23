@@ -9,11 +9,26 @@ void test_winner_nobody() {
 }
 
 void test_winner_x() {
-  std::cout << "X can win (not implemented yet)" << std::endl;
+  TicTacToe::Game game;
+  game.go(0);
+  game.go(3);
+  game.go(1);
+  game.go(4);
+  game.go(2);
+  assert(game.winner() == 1);
+  std::cout << "X can win." << std::endl;
 }
 
 void test_winner_o() {
-  std::cout << "O can win (not implemented yet)" << std::endl;
+  TicTacToe::Game game;
+  game.go(8);
+  game.go(0);
+  game.go(3);
+  game.go(1);
+  game.go(4);
+  game.go(2);
+  assert(game.winner() == 2);
+  std::cout << "O can win." << std::endl;
 }
 
 void test_winner_no_possible_move() {
