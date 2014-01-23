@@ -47,3 +47,22 @@ bool TicTacToe::Game::go (int id) {
 
   return false;
 }
+
+int TicTacToe::Game::winner () {
+  const int WINNERS[8][3] = {
+    {0, 1, 2}, {3, 4, 5}, {6, 7, 8},
+    {0, 3, 6}, {1, 4, 7}, {2, 5, 8},
+    {0, 4, 8}, {2, 4, 6}
+  };
+
+  for(int winners_id = 0; winners_id < 9; winners_id++) {
+    int a = field[ WINNERS[winners_id][0] ];
+    int b = field[ WINNERS[winners_id][1] ];
+    int c = field[ WINNERS[winners_id][2] ];
+
+    if ((a != 0) && (a == b) && (a == c)) {
+      return a;
+    }
+  }
+  return 0;
+}

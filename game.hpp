@@ -8,8 +8,9 @@ namespace TicTacToe {
       int move;
 
     public:
-      Game (void);
+      Game ();
       std::string to_string ();
       bool go (int);
+      int winner ();
   };
 }
