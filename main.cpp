@@ -1,4 +1,6 @@
 #include <iostream>
+#include <string>
+#include <sstream>
 #include "game.hpp"
 
 using namespace std;
@@ -11,6 +13,7 @@ int main() {
   TicTacToe::Game game;
 
   int eingabe;
+  string seingabe;
 
   while(game.winner() == 0) {
     make_space();
@@ -36,7 +39,8 @@ int main() {
     }
 
     while(true) {
-      cin >> eingabe;
+      getline(cin, seingabe);
+      stringstream(seingabe) >> eingabe;
 
       if(eingabe == -1) return 0;
 
