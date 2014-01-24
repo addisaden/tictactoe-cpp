@@ -111,7 +111,24 @@ void test_current_move() {
   std::cout << "No current move without a blank field." << std::endl;
 }
 
+// __Get-Field-Test__
+
+void test_get_field() {
+  TicTacToe::Game game;
+  assert(game.get(0) == 0);
+  std::cout << "Can get Empty-Field." << std::endl;
+  game.go(0);
+  assert(game.get(0) == 1);
+  std::cout << "Can get X-Field." << std::endl;
+  game.go(1);
+  assert(game.get(1) == 2);
+  std::cout << "Can get O-Field." << std::endl;
+  assert(game.get(100) == (-1));
+  std::cout << "Can't get non-existing-field." << std::endl;
+}
+
 int main() {
+  std::cout << "__G_A_M_E__T_E_S_T__" << std::endl << std::endl;
   std::cout << "__Winner-Test__" << std::endl;
   test_winner_nobody();
   test_winner_x();
@@ -125,6 +142,9 @@ int main() {
 
   std::cout << std::endl << "__Current-Move-Test__" << std::endl;
   test_current_move();
+
+  std::cout << std::endl << "__Get-Field-Test__" << std::endl;
+  test_get_field();
 
   return 0;
 }

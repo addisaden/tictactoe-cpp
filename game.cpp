@@ -86,3 +86,11 @@ int TicTacToe::Game::current () {
   }
   return ((move % 2) + 1);
 }
+
+int TicTacToe::Game::get(int i) {
+  if(i < 0 || i > 8) {
+    return -1;
+  }
+  return field[i];
+}
+

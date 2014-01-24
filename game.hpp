@@ -29,5 +29,7 @@ namespace TicTacToe {
       //  1 = X turn
       //  2 = O turn
       int current ();
+
+      int get(int);
   };
 }
