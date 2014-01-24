@@ -55,7 +55,8 @@ int TicTacToe::Game::winner () {
     {0, 4, 8}, {2, 4, 6}
   };
 
-  for(int winners_id = 0; winners_id < 9; winners_id++) {
+  // is winner?
+  for(int winners_id = 0; winners_id < 8; winners_id++) {
     int a = field[ WINNERS[winners_id][0] ];
     int b = field[ WINNERS[winners_id][1] ];
     int c = field[ WINNERS[winners_id][2] ];
@@ -64,5 +65,14 @@ int TicTacToe::Game::winner () {
       return a;
     }
   }
-  return 0;
+
+  // is no possible field
+  for(int i = 0; i < 9; i++) {
+    if(field[i] == 0)
+      return 0;
+    else
+      continue;
+  }
+
+  return (-1);
 }
