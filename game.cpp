@@ -37,6 +37,9 @@ std::string TicTacToe::Game::to_string () {
 }
 
 bool TicTacToe::Game::go (int id) {
+  if(winner() != 0)
+    return false;
+
   if (id < 9 && id >= 0) {
     if (field[id] == 0) {
       field[id] = move % 2 + 1;
@@ -75,4 +78,11 @@ int TicTacToe::Game::winner () {
   }
 
   return (-1);
+}
+
+int TicTacToe::Game::current () {
+  if(winner() != 0) {
+    return 0;
+  }
+  return ((move % 2) + 1);
 }

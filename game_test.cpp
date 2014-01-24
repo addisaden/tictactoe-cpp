@@ -75,6 +75,42 @@ void test_out_of_range_move() {
   std::cout << "Can't move out of place." << std::endl;
 }
 
+// __Current-Move-Test__
+
+void test_current_move() {
+  TicTacToe::Game game, game2;
+  assert(game.current() == 1);
+  game.go(0);
+  assert(game.current() == 2);
+  game.go(1);
+  assert(game.current() == 1);
+  std::cout << "Can get current move." << std::endl;;
+
+  // On win, no possible move
+  game.go(3);
+  game.go(4);
+  game.go(6);
+  assert(game.go(8) == false);
+  assert(game.current() == 0);
+  assert(game.winner() == 1);
+  std::cout << "No current move with a winner." << std::endl;
+
+  // Can't get current, when there is no possible move
+  game2.go(0); // x
+  game2.go(1); // o
+  game2.go(2); // x
+  game2.go(3); // o
+  game2.go(5); // x
+  game2.go(4); // o
+  game2.go(6); // x
+  game2.go(8); // o
+  game2.go(7); // x
+  assert(game2.go(8) == false);
+  assert(game2.current() == 0);
+  assert(game2.winner() == (-1));
+  std::cout << "No current move without a blank field." << std::endl;
+}
+
 int main() {
   std::cout << "__Winner-Test__" << std::endl;
   test_winner_nobody();
@@ -86,6 +122,9 @@ int main() {
   test_possible_move();
   test_impossible_move();
   test_out_of_range_move();
+
+  std::cout << std::endl << "__Current-Move-Test__" << std::endl;
+  test_current_move();
 
   return 0;
 }

@@ -12,5 +12,6 @@ namespace TicTacToe {
       std::string to_string ();
       bool go (int);
       int winner ();
+      int current ();
   };
 }
