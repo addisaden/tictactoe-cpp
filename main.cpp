@@ -11,8 +11,19 @@ void make_space () {
 }
 
 int main() {
+  string p1_name, p2_name;
+
+  cout << "  T I C   T A C   T O E" << endl << endl << endl;
+
+  cout << "Bitte 1. Spielernamen eingeben: ";
+  getline(cin, p1_name);
+
+  cout << "Bitte 2. Spielernamen eingeben: ";
+  getline(cin, p2_name);
+
+
   TicTacToe::Game game;
-  TicTacToe::Player_Human p1 {"Adrian", 'X', 1}, p2 {"Georg", 'O', 2};
+  TicTacToe::Player_Human p1 {p1_name, 'X', 1}, p2 {p2_name, 'O', 2};
 
   int eingabe;
   string seingabe;
@@ -41,10 +52,10 @@ int main() {
 
   switch(game.winner()) {
     case 1:
-      cout << "X hat gewonnen.";
+      cout << p1_name << " hat mit 'X' gewonnen.";
       break;
     case 2:
-      cout << "O hat gewonnen.";
+      cout << p2_name << " hat mit 'O' gewonnen.";
       break;
     case (-1):
       cout << "Es ist unentschieden.";
