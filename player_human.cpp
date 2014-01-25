@@ -16,11 +16,22 @@ int TicTacToe::Player_Human::go(std::string game_representation, int feld[]) {
   std::cout << " 1 | 2 | 3" << std::endl << " 4 | 5 | 6" << std::endl << " 7 | 8 | 9" << std::endl << std::endl;
 
   std::cout << game_representation << std::endl << std::endl;
+  
+  while(true) {
+    std::cout << name << " (" << sign << "): ";
 
-  std::cout << name << " (" << sign << "): ";
+    std::getline(std::cin, swahl);
+    std::stringstream(swahl) >> wahl;
+    wahl--;
 
-  std::getline(std::cin, swahl);
-  std::stringstream(swahl) >> wahl;
+    if(wahl < 0 || wahl > 8)
+      std::cout << std::endl << "Feld existiert nicht. ";
+    else if(feld[wahl] != 0)
+      std::cout << std::endl << "Feld ist belegt. ";
+    else
+      break;
 
-  return wahl - 1;
+    std::cout << "Bitte Eingabe wiederholen." << std::endl;
+  }
+  return wahl;
 }
