@@ -2,15 +2,14 @@
 #include <iostream>
 
 int TicTacToe::Player_Computer::go(std::string game_repr, int field[9]) {
-  std::cout << "0" << std::endl;
   // set chooser to zero
   for(int i = 0; i < 9; i++)
     chooser[i] = 0;
 
-  for(int i = 0; i < 8; i++) {
-    int wina = winner_positions[i][0];
-    int winb = winner_positions[i][1];
-    int winc = winner_positions[i][2];
+  for(int ii = 0; ii < 8; ii++) {
+    int wina = winner_positions[ii][0];
+    int winb = winner_positions[ii][1];
+    int winc = winner_positions[ii][2];
 
     /*
      * X = OWN
@@ -24,28 +23,77 @@ int TicTacToe::Player_Computer::go(std::string game_repr, int field[9]) {
      * o + + = -100    2    2
      *
      */
-    
-    if( (field[wina] != 0 && field[wina] != player_id) ||
-        (field[winb] != 0 && field[winb] != player_id) ||
-        (field[winc] != 0 && field[winc] != player_id)) {
-      chooser[wina] = chooser[wina] - 1;
-      chooser[winb] = chooser[winb] - 1;
-      chooser[winc] = chooser[winc] - 1;
-    } else if (field[wina] == player_id ||
-               field[winb] == player_id ||
-               field[winc] == player_id) {
-      chooser[wina] += 3;
-      chooser[winb] += 3;
-      chooser[winc] += 3;
-    } else {
-      chooser[wina] += 2;
-      chooser[winb] += 2;
-      chooser[winc] += 2;
+    int other = 0,
+        self = 0,
+        nothing = 0,
+        current[3] = { wina, winb, winc };
+
+    for(int i = 0; i < 3; i++) {
+      int val = field[current[i]];
+      if(val == 0) {
+        nothing++;
+      } else if(val == player_id) {
+        self++;
+      } else if(val != player_id && val != 0) {
+        other++;
+      }
+    }
+
+    // + + + =    1    1    1
+    if(nothing >= 3) {
+      chooser[wina]++;
+      chooser[winb]++;
+      chooser[winc]++;
+    }
+    // x + + = -100    3    3
+    else if(nothing > 1 && self >= 1) {
+      for(int i = 0; i < 3; i++) {
+        if(field[current[i]] == 0)
+          chooser[current[i]] += 3;
+        else
+          chooser[current[i]] -= 100;
+      }
+    }
+    // x x + = -100 -100  100
+    else if(nothing == 1 && self == 2) {
+      for(int i = 0; i < 3; i++) {
+        if(field[current[i]] == 0)
+          chooser[current[i]] += 100;
+        else
+          chooser[current[i]] -= 100;
+      }
+    }
+    // x o + = -100 -100   -1
+    else if(other >= 1 && self >= 1) {
+      for(int i = 0; i < 3; i++) {
+        if(field[current[i]] == 0)
+          chooser[current[i]] -= 1;
+        else
+          chooser[current[i]] -= 100;
+      }
+    }
+    // o o + = -100 -100   50
+    else if(nothing == 1 && other == 2) {
+      for(int i = 0; i < 3; i++) {
+        if(field[current[i]] == 0)
+          chooser[current[i]] += 50;
+        else
+          chooser[current[i]] -= 100;
+      }
+    }
+    // o + + = -100    2    2
+    else if(nothing >= 2 && other >= 1) {
+      for(int i = 0; i < 3; i++) {
+        if(field[current[i]] == 0)
+          chooser[current[i]] += 2;
+        else
+          chooser[current[i]] -= 100;
+      }
     }
   }
 
   int choosed = -1;
-  int choosed_value = -100;
+  int choosed_value = 0;
 
   for(int i = 0; i < 9; i++) {
     if(field[i] != 0) {
