@@ -1,5 +1,9 @@
 #include <string>
+
+#ifndef PLAYER_HPP
+#define PLAYER_HPP
 #include "player.hpp"
+#endif
 
 namespace TicTacToe {
   class Player_Human: public Player {

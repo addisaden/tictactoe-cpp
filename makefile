@@ -2,8 +2,8 @@ COMPILER = g++ --std=c++11
 
 all: main
 
-main: main.o game.o player_human.o
-	$(COMPILER) main.o game.o player_human.o -o tictactoe.out
+main: main.o game.o player_human.o player_computer.o
+	$(COMPILER) main.o game.o player_human.o player_computer.o -o tictactoe.out
 
 main.o:
 	$(COMPILER) -c main.cpp
@@ -13,6 +13,9 @@ game.o:
 
 player_human.o:
 	$(COMPILER) -c player_human.cpp
+
+player_computer.o:
+	$(COMPILER) -c player_computer.cpp
 
 test: game_test
 

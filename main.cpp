@@ -3,6 +3,7 @@
 #include <sstream>
 #include "game.hpp"
 #include "player_human.hpp"
+#include "player_computer.hpp"
 
 using namespace std;
 
@@ -15,15 +16,15 @@ int main() {
 
   cout << "  T I C   T A C   T O E" << endl << endl << endl;
 
-  cout << "Bitte 1. Spielernamen eingeben: ";
+  cout << "Name: ";
   getline(cin, p1_name);
 
-  cout << "Bitte 2. Spielernamen eingeben: ";
-  getline(cin, p2_name);
+  p2_name = "Computer";
 
 
   TicTacToe::Game game;
-  TicTacToe::Player_Human p1 {p1_name, 'X', 1}, p2 {p2_name, 'O', 2};
+  TicTacToe::Player_Human p1 {p1_name, 'X', 1};
+  TicTacToe::Player_Computer p2 {p2_name, 'O', 2};
 
   int eingabe;
   string seingabe;
