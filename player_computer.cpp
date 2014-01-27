@@ -11,6 +11,19 @@ int TicTacToe::Player_Computer::go(std::string game_repr, int field[9]) {
     int wina = winner_positions[i][0];
     int winb = winner_positions[i][1];
     int winc = winner_positions[i][2];
+
+    /*
+     * X = OWN
+     * O = OTHER
+     * + = EMPTY
+     * + + + =    1    1    1
+     * x + + = -100    3    3
+     * x x + = -100 -100  100
+     * x o + = -100 -100   -1
+     * o o + = -100 -100   50
+     * o + + = -100    2    2
+     *
+     */
     
     if( (field[wina] != 0 && field[wina] != player_id) ||
         (field[winb] != 0 && field[winb] != player_id) ||
@@ -31,13 +44,17 @@ int TicTacToe::Player_Computer::go(std::string game_repr, int field[9]) {
     }
   }
 
-  int choosed = 0;
+  int choosed = -1;
   int choosed_value = -100;
 
   for(int i = 0; i < 9; i++) {
     if(field[i] != 0) {
       continue;
+    } else if(choosed == -1) {
+      choosed = i;
+      choosed_value = chooser[i];
     }
+
     if(chooser[i] >= choosed_value) {
       choosed_value = chooser[i];
       choosed = i;
